@@ -100,6 +100,11 @@ defmodule Plug.Conn.Status do
   @doc """
   Returns the status code given an integer or a known atom.
 
+  ## Example
+
+      iex> Plug.Conn.Status.code(:not_found)
+      404
+
   ## Known status codes
 
   The following status codes can be given as atoms with their
@@ -130,6 +135,12 @@ defmodule Plug.Conn.Status do
   Returns the atom for given integer.
 
   See `code/1` for the mapping.
+
+  ## Example
+
+      iex> Plug.Conn.Status.reason_atom(500)
+      :internal_server_error
+
   """
   @spec reason_atom(integer) :: atom
   def reason_atom(code)
@@ -143,6 +154,17 @@ defmodule Plug.Conn.Status do
     raise ArgumentError, "unknown status code #{inspect(code)}"
   end
 
+  @doc """
+  Returns a text representation of a status given its integer code.
+
+  See `code/1` for the mapping.
+
+  ## Example
+
+      iex> Plug.Conn.Status.reason_phrase(403)
+      "Forbidden"
+
+  """
   @spec reason_phrase(integer) :: String.t()
   def reason_phrase(integer)
 
